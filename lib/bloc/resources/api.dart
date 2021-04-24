@@ -10,16 +10,19 @@ class ApiProvider {
   final _apiKey = 'your_api_key';
 
   Future<Person> registerUser(String username) async {
-    final response = await client.post("http://127.0.0.1:5000/api/register",
-        // headers: "",
-        body: jsonEncode({
-          "username": username,
-        }));
+    final response =
+        await client.post("https://healthappdatabase.herokuapp.com/api/signup",
+            // headers: "",
+            body: jsonEncode({
+              "username": username,
+            }));
     final Map result = json.decode(response.body);
+    final int id = result["status"].length - 1;
     if (response.statusCode == 201) {
       // If the call to the server was successful, parse the JSON
-      await saveApiKey(result["status"]["api_key"]);
-      return Person.fromJson(result["status"]);
+      print(result);
+      await saveApiKey(result["data"]["api_key"]);
+      return Person.fromJson(result["data"]);
     } else {
       // If that call was not successful, throw an error.
       throw Exception('Failed to load post');

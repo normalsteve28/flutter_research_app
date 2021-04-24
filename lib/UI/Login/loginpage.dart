@@ -84,7 +84,7 @@ class LoginPage extends StatelessWidget {
                       ),
                       LoginForm(
                         login: login,
-                        newUser: false,
+                        newUser: true,
                       ) // This contains textfield and signup button
                     ],
                   ),
@@ -136,16 +136,18 @@ class _LoginFormState extends State<LoginForm> {
             "/login", //This is a route, its value can be found in main (it heads to homepage)
           );
           if (widget.newUser == true) {
-            if (usernameController.text != null) {
-              userBloc.registerUser(usernameController.text).then((_) {
+            if (username != null) {
+              print(username);
+              userBloc.registerUser(username).then((_) {
                 widget.login();
               });
             }
           } else {
-            if (usernameText.text != null || passwordText.text != null) {
+            if (username != null || passwordText.text != null) {
+              print("username2");
               userBloc
                   .signinUser(
-                usernameText.text,
+                username,
                 "", /*""*/
               )
                   .then((_) {

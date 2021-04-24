@@ -21,7 +21,9 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       color: Colors.yellow,
-      home: LoginPage(),
+      home: LoginPage(
+        newUser: false,
+      ),
       routes: {
         "/login": (_) => Home(username: username)
       }, // This is done so that it won't return to the login page (Fixes the Learn page back button problem)

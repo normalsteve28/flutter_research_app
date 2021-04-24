@@ -1,5 +1,5 @@
 //Dart file that contains list of systolic, diastolic, heart rate
-// Is NOT final data source for BP and heart rate, only a temporary placeholder
+// Is NOT final data saving place for BP and heart rate, only a temporary placeholder
 /* 
 The history boxes code make boxes starting from the first index.
 However, the history boxes are expected to show the newest data first.
