@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../marqueewidget.dart';
 
 import './startbutton.dart'; // contains the start button
 
@@ -39,14 +40,11 @@ class Monitor extends StatelessWidget {
                 // This SizedBox contains good morning text
                 width: 275,
                 height: 40,
-                child: SingleChildScrollView(
+                child: MarqueeWidget(
                   // This is so that text will scroll if it is bigger than the box
-                  scrollDirection: Axis.horizontal,
-                  physics: BouncingScrollPhysics(),
-                  primary: true,
+                  direction: Axis.horizontal,
                   child: Text(
                     "Good Morning, $username",
-                    textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 30,

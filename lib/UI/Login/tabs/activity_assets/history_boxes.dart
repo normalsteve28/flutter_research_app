@@ -34,60 +34,76 @@ class _HistoryBoxesState extends State<HistoryBoxes> {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-        // This SingleChildScrollView allows the horizontal scrolling of the contents
-        // of the child of Container, which is Row
-        physics: BouncingScrollPhysics(),
-        scrollDirection: Axis.horizontal,
-        child: Container(
-          child: Row(mainAxisAlignment: MainAxisAlignment.spaceAround,
-              // The children below are boxes, will have to replace with a map of a list soon
-              children: [
-                Column(
-                  children: [
-                    RaisedButton(
-                        // Button that adds history boxes
-                        onPressed: () {
-                          setState(() {
-                            if (dataIsEqualNotEmpty) {
-                              // This code is executed if the dataset is not empty
-                              index += 1;
-                              if (index == sys.length - 1) {
-                                // This code executes if the index is is the last index
-                                addHistoryBox();
-                              } else {
-                                /* 
-                                This code executes if the index is not the last index.
-                                The reason for this check is to prevent 
-                                */
-                                sys.add(0);
-                                dia.add(0);
-                                heartRate.add(0);
-                                index = sys.length - 1;
-                                addHistoryBox();
-                              }
-                            } else {
-                              sys.add(0);
-                              dia.add(0);
-                              heartRate.add(0);
-                              index += 1;
-                              addHistoryBox();
-                            }
-                          });
-                          printListLength();
-                        },
-                        child: Text('Add')),
-                    RaisedButton(
-                        // Button that removes history boxes
-                        onPressed: () {
-                          setState(() {
-                            removeHistoryBox();
-                          });
-                          printListLength();
-                        },
-                        child: Text('Remove'))
-                  ],
+    return Row(
+      // The children below are boxes, will have to replace with a map of a list soon
+      children: [
+        Column(
+          children: [
+            TextButton(
+              // Button that adds history boxes
+              onPressed: () {
+                setState(() {
+                  if (dataIsEqualNotEmpty) {
+                    // This code is executed if the dataset is not empty
+                    index += 1;
+                    if (index == sys.length - 1) {
+                      // This code executes if the index is is the last index
+                      addHistoryBox();
+                    } else {
+                      /* 
+                                  This code executes if the index is not the last index.
+                                  The reason for this check is to prevent 
+                                  */
+                      sys.add(0);
+                      dia.add(0);
+                      heartRate.add(0);
+                      index = sys.length - 1;
+                      addHistoryBox();
+                    }
+                  } else {
+                    sys.add(0);
+                    dia.add(0);
+                    heartRate.add(0);
+                    index += 1;
+                    addHistoryBox();
+                  }
+                });
+                printListLength();
+              },
+              child: Text(
+                '+',
+                style: TextStyle(
+                  color: Colors.pink,
+                  fontSize: 35,
                 ),
+              ),
+            ),
+            TextButton(
+              // Button that removes history boxes
+              onPressed: () {
+                setState(() {
+                  removeHistoryBox();
+                });
+                printListLength();
+              },
+              child: Text(
+                '-',
+                style: TextStyle(
+                  color: Colors.pink,
+                  fontSize: 45,
+                ),
+              ),
+            )
+          ],
+        ),
+        Expanded(
+          child: SingleChildScrollView(
+            // This SingleChildScrollView allows the horizontal scrolling of the contents
+            // of the child of Container, which is Row
+            physics: BouncingScrollPhysics(),
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              children: [
                 items.isEmpty
                     ? Padding(
                         padding: const EdgeInsets.all(10.0),
@@ -96,8 +112,12 @@ class _HistoryBoxesState extends State<HistoryBoxes> {
                       )
                     : Container(),
                 ...items,
-              ]),
-        ));
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
   }
 }
 

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 
-LineChartData sampleData1() {
+LineChartData sampleData2() {
   return LineChartData(
     lineTouchData: LineTouchData(
       touchTooltipData: LineTouchTooltipData(
@@ -99,11 +99,11 @@ LineChartData sampleData1() {
     maxX: 14,
     maxY: 10,
     minY: 0,
-    lineBarsData: linesBarData1(),
+    lineBarsData: linesBarData2(),
   );
 }
 
-List<LineChartBarData> linesBarData1() {
+List<LineChartBarData> linesBarData2() {
   // First line
   final LineChartBarData lineChartBarData1 = LineChartBarData(
     spots: [
