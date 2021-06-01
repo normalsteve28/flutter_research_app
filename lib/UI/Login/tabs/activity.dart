@@ -9,8 +9,9 @@ import 'activity_assets/charts_tabbar.dart';
 
 class Activity extends StatefulWidget {
   final String username;
+  final String greeting;
 
-  Activity(this.username);
+  Activity(this.username, this.greeting);
 
   @override
   _ActivityState createState() => _ActivityState();
@@ -18,12 +19,26 @@ class Activity extends StatefulWidget {
 
 class _ActivityState extends State<Activity> {
   bool isShowingMainData;
+  bool dataNotEmpty = true;
 
   @override
   void initState() {
     super.initState();
     isShowingMainData = true;
+    dataNotEmpty = true;
   }
+
+  /* void checkIfDataEmpty() {
+    if (sys.length > 0 &&
+        dia.length > 0 &&
+        heartRate.length > 0 &&
+        sys.length == dia.length &&
+        dia.length == heartRate.length) {
+      dataEmpty = false;
+    } else {
+      dataEmpty = true;
+    }
+  } */
 
   @override
   Widget build(BuildContext context) {
@@ -36,8 +51,10 @@ class _ActivityState extends State<Activity> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               ActivityPerson(), // This widget is the icon
-              GoodMorning(widget
-                  .username), // This widget is the good morning text with the name
+              GoodMorning(
+                  widget.username,
+                  widget
+                      .greeting), // This widget is the good morning text with the name
             ],
           ),
           Row(
@@ -57,7 +74,7 @@ class _ActivityState extends State<Activity> {
                   ),
                 ),
               ),
-              SeeAllButton(null)
+              // SeeAllButton(null)
             ],
           ),
           HistoryBoxes(),
@@ -78,7 +95,11 @@ class _ActivityState extends State<Activity> {
                   ),
                 ),
               ),
-              SeeAllButton(null)
+              TextButton(
+                onPressed: null, //checkIfDataEmpty,
+                child: Text("Refresh"),
+              ),
+              // SeeAllButton(null)
             ],
           ),
           Expanded(
@@ -92,7 +113,7 @@ class _ActivityState extends State<Activity> {
                     offset: Offset(0, -1),
                   ),
                 ],
-                color: Colors.white,
+                color: Color(0xfffafafa),
               ),
               child: AspectRatio(
                 // Chart
@@ -108,7 +129,7 @@ class _ActivityState extends State<Activity> {
                       begin: Alignment.bottomCenter,
                       end: Alignment.topCenter,
                     ), */
-                    color: Colors.white,
+                    color: Color(0xfffafafa),
                   ),
                   child: Stack(
                     children: <Widget>[
@@ -119,11 +140,16 @@ class _ActivityState extends State<Activity> {
                             height: 10,
                           ),
                           Expanded(
-                            child: Padding(
-                              padding:
-                                  const EdgeInsets.only(right: 16.0, left: 6.0),
-                              child: ChartsTabBar(),
-                            ),
+                            child: dataNotEmpty
+                                ? ChartsTabBar()
+                                : Center(
+                                    child: Text(
+                                      "You haven't started measuring yet.",
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                      ),
+                                    ),
+                                  ),
                           ),
                           const SizedBox(
                             height: 10,

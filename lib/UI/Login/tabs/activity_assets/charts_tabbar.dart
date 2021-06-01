@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
+import 'package:path_provider/path_provider.dart';
+import 'dart:io';
+import 'dart:convert';
 
 import 'chart1.dart';
 import 'chart2.dart';
@@ -14,11 +17,25 @@ class _ChartsTabBarState extends State<ChartsTabBar>
     with TickerProviderStateMixin {
   TabController _chartsTabController;
 
+  File jsonFile;
+  Directory dir;
+  String fileName = "BPDatta.json";
+  bool fileExists = false;
+  List<dynamic> fileContent = [];
+
   @override
   void initState() {
     super.initState();
 
     _chartsTabController = new TabController(length: 3, vsync: this);
+    getExternalStorageDirectory().then((Directory directory) {
+      dir = directory;
+      jsonFile = new File(dir.path + "/" + fileName);
+      fileExists = jsonFile.existsSync();
+      if (fileExists)
+        this.setState(
+            () => fileContent = json.decode(jsonFile.readAsStringSync()));
+    });
   }
 
   @override

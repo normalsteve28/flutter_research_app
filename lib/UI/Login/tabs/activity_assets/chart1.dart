@@ -18,21 +18,30 @@ LineChartData sampleData1() {
       bottomTitles: SideTitles(
         // x-axis titles
         showTitles: true,
-        reservedSize: 20,
+        interval: 1,
+        reservedSize: 10,
         getTextStyles: (value) => const TextStyle(
           color: Color(0xff72719b),
           fontWeight: FontWeight.bold,
-          fontSize: 15,
+          fontSize: 10,
         ),
         margin: 5,
         getTitles: (value) {
           switch (value.toInt()) {
+            case 1:
+              return 'Sunday';
             case 2:
-              return 'SEPT';
+              return 'Monday';
+            case 3:
+              return 'Tuesday';
+            case 4:
+              return 'Wednesday';
+            case 5:
+              return 'Thursday';
+            case 6:
+              return 'Friday';
             case 7:
-              return 'OCT';
-            case 12:
-              return 'DEC';
+              return 'Saturday';
           }
           return '';
         },

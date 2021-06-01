@@ -26,13 +26,13 @@ class AppBarwithIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly, //was spaceBetween
         children: [
-          IconButton(
+          /* IconButton(
             alignment: Alignment.centerLeft,
             icon: SvgPicture.asset(search),
             onPressed: null,
-          ),
+          ), */
           Text(
             'Learn',
             textAlign: TextAlign.center,
@@ -40,11 +40,11 @@ class AppBarwithIcon extends StatelessWidget {
               fontFamily: 'Montserrat',
             ),
           ),
-          IconButton(
+          /* IconButton(
             alignment: Alignment.centerRight,
             icon: SvgPicture.asset(bookmarks),
             onPressed: null,
-          )
+          ) */
         ],
       ),
     );
@@ -159,7 +159,7 @@ class _LearnPageState extends State<LearnPage> {
                   ),
                 ),
               ),
-              SeeAllButton(null)
+              // SeeAllButton(null)
             ],
           ),
           ArticleList()

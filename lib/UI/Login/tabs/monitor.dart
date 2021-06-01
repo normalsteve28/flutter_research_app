@@ -5,8 +5,9 @@ import './startbutton.dart'; // contains the start button
 
 class Monitor extends StatelessWidget {
   final String username;
+  final String greeting;
 
-  Monitor(this.username);
+  Monitor(this.username, this.greeting);
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +45,7 @@ class Monitor extends StatelessWidget {
                   // This is so that text will scroll if it is bigger than the box
                   direction: Axis.horizontal,
                   child: Text(
-                    "Good Morning, $username",
+                    "$greeting $username",
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 30,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'assets.dart';
 import 'username.dart';
@@ -120,6 +121,11 @@ class _LoginFormState extends State<LoginForm> {
   // This variable holds the function of the sign up button
   TextEditingController usernameText = new TextEditingController();
   TextEditingController passwordText = new TextEditingController();
+
+  addStringToSF() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('username', "${usernameController.text}");
+  }
 
   void checkIfTextEmpty() {
     //This function checks if the text field is empty and assigns color and function to the button

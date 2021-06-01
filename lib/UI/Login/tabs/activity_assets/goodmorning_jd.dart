@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 //This class contains the good morning text
 class GoodMorning extends StatelessWidget {
   final String username;
+  final String greeting;
 
-  GoodMorning(this.username);
+  GoodMorning(this.username, this.greeting);
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +14,7 @@ class GoodMorning extends StatelessWidget {
       child: Column(
         children: [
           Text(
-            "Good Morning",
+            "$greeting",
             style: TextStyle(
               color: Colors.black,
               fontSize: 24,
