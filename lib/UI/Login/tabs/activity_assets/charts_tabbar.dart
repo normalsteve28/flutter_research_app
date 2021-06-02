@@ -7,6 +7,7 @@ import 'dart:convert';
 import 'chart1.dart';
 import 'chart2.dart';
 import 'chart3.dart';
+import '../../demomode.dart';
 
 class ChartsTabBar extends StatefulWidget {
   @override
@@ -55,25 +56,49 @@ class _ChartsTabBarState extends State<ChartsTabBar>
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: LineChart(
-                  //Line Chart data
-                  sampleData1(),
-                  swapAnimationDuration: const Duration(milliseconds: 250),
-                ),
+                child: demo
+                    ? Container(
+                        child: Center(
+                            child: Text(
+                        "Not available in the learning version of the app!",
+                        style:
+                            TextStyle(fontFamily: 'Montserrat', fontSize: 15),
+                      )))
+                    : Container(
+                        child: ChartsOne(),
+                      ),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: LineChart(
-                  sampleData2(),
-                  swapAnimationDuration: const Duration(milliseconds: 250),
-                ),
+                child: demo
+                    ? Container(
+                        child: Center(
+                            child: Text(
+                        "Not available in the learning version of the app!",
+                        style:
+                            TextStyle(fontFamily: 'Montserrat', fontSize: 15),
+                      )))
+                    : LineChart(
+                        sampleData2(),
+                        swapAnimationDuration:
+                            const Duration(milliseconds: 250),
+                      ),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: LineChart(
-                  sampleData3(),
-                  swapAnimationDuration: const Duration(milliseconds: 250),
-                ),
+                child: demo
+                    ? Container(
+                        child: Center(
+                            child: Text(
+                        "Not available in the learning version of the app!",
+                        style:
+                            TextStyle(fontFamily: 'Montserrat', fontSize: 15),
+                      )))
+                    : LineChart(
+                        sampleData3(),
+                        swapAnimationDuration:
+                            const Duration(milliseconds: 250),
+                      ),
               ),
             ],
           ),

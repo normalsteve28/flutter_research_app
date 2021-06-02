@@ -169,7 +169,8 @@ class _HistoryBoxesState extends State<HistoryBoxes> {
               items.isEmpty
                   ? Padding(
                       padding: const EdgeInsets.all(10.0),
-                      child: Text("You havent started measuring yet.",
+                      child: Text(
+                          "You havent started measuring yet.\n(Can add boxes for testing purposes)",
                           style: TextStyle(fontSize: 18)),
                     )
                   : Container(),
