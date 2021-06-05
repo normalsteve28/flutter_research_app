@@ -27,7 +27,7 @@ class MonitorPageTwo extends StatelessWidget {
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(20.0),
-                    child: Image.asset(doctorHeartPng),
+                    child: Image.asset(sadDoctorHeart),
                   ),
                   Text(
                     "We're sorry! This function (blood pressure measurement) is not available in this version of the app.",

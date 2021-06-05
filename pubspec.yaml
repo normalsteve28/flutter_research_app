@@ -77,6 +77,7 @@ flutter:
     - assets/articleimages/heartrate.png
     - assets/articleimages/hearthealthy.png
     - assets/icons/doctor_heart.png
+    - assets/icons/sad_doctor_heart.png
     - assets/articleimages/hypertension.svg
     - assets/articleimages/bloodpressure.svg
     - assets/articleimages/hypertension_flip.svg
