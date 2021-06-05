@@ -22,23 +22,28 @@ class MonitorPageTwo extends StatelessWidget {
         body: Center(
           child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Column(
-              children: [
-                SvgPicture.asset(doctorHeart),
-                Text(
-                  "We're sorry! This function (blood pressure measurement) is not available in this version of the app.",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontFamily: 'Montserrat', fontSize: 25),
-                ),
-                Text(
-                  "\n\n Paumanhin po! Ang function na ito ay hindi magagamit sa bersyong ito ng app.",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontFamily: 'Montserrat',
-                      fontSize: 25,
-                      fontStyle: FontStyle.italic),
-                ),
-              ],
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(20.0),
+                    child: Image.asset(doctorHeartPng),
+                  ),
+                  Text(
+                    "We're sorry! This function (blood pressure measurement) is not available in this version of the app.",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontFamily: 'Montserrat', fontSize: 25),
+                  ),
+                  Text(
+                    "\n\n Paumanhin po! Ang function na ito ay hindi magagamit sa bersyong ito ng app.",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        fontFamily: 'Montserrat',
+                        fontSize: 25,
+                        fontStyle: FontStyle.italic),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

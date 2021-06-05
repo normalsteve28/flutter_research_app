@@ -1,4 +1,5 @@
 // import 'package:flutter/material.dart';
+import '../../assets.dart';
 
 const heartAttack = 'assets/articleimages/heartattack.jpg';
 const hypertensionPng = 'assets/articleimages/hypertension.png';
@@ -161,6 +162,7 @@ List<String> images = [
   bpPng,
   heartRatePng,
   heartHealthyPng,
+  doctorHeartPng
 ];
 
 List<String> imageSource = [
@@ -174,4 +176,5 @@ List<String> articleIcons = [
   bpSvg,
   heartRateSvg,
   heartHealthySvg,
+  doctorHeart
 ];
