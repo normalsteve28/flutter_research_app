@@ -5,7 +5,7 @@ import 'UI/Login/homepage.dart'; // Imports homepage
 import 'UI/Login/username.dart'; // Imports username
 
 import 'package:shared_preferences/shared_preferences.dart';
-import 'bloc/resources/repository.dart';
+// import 'bloc/resources/repository.dart';
 import 'bloc/blocs/user_bloc_provider.dart';
 
 void main() => runApp(MyApp());
@@ -41,7 +41,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   String apiKey = "";
-  Repository _repository = Repository();
+  // Repository _repository = Repository();
 
   @override
   Widget build(BuildContext context) {
@@ -75,7 +75,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future signinUser() async {
-    String userName = "";
+    // String userName = "";
     apiKey = await getApiKey();
     if (apiKey != null) {
       if (apiKey.length > 0) {
@@ -91,6 +91,6 @@ class _HomePageState extends State<HomePage> {
 
   Future getApiKey() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    return await prefs.getString("API_Token");
+    return /* await */ prefs.getString("API_Token");
   }
 }

@@ -7,7 +7,7 @@ import '../../models/classes/user.dart';
 
 class ApiProvider {
   Client client = Client();
-  final _apiKey = 'your_api_key';
+  // final _apiKey = 'your_api_key';
 
   Future<Person> registerUser(String username) async {
     final response =
@@ -17,7 +17,7 @@ class ApiProvider {
               "username": username,
             }));
     final Map result = json.decode(response.body);
-    final int id = result["status"].length - 1;
+    // final int id = result["status"].length - 1;
     if (response.statusCode == 201) {
       // If the call to the server was successful, parse the JSON
       print(result);
@@ -94,8 +94,8 @@ class ApiProvider {
     }
   }
 
-  saveApiKey(String api_key) async {
+  saveApiKey(String apiKey) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setString('API_Token', api_key);
+    await prefs.setString('API_Token', apiKey);
   }
 }

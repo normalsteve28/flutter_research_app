@@ -2,10 +2,10 @@
 
 class Person {
   String username;
-  String api_key;
+  String apiKey;
   int id;
 
-  Person(this.id, this.username, this.api_key);
+  Person(this.id, this.username, this.apiKey);
 
   factory Person.fromJson(Map<String, dynamic> parsedJson) {
     return Person(
