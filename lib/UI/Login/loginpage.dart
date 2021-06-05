@@ -1,16 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:io';
+import 'dart:convert';
+import 'package:path_provider/path_provider.dart';
 
 import 'assets.dart';
 import 'username.dart';
 import '../../bloc/blocs/user_bloc_provider.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   final VoidCallback login;
   final bool newUser;
 
   const LoginPage({Key key, this.login, this.newUser}) : super(key: key);
+
+  @override
+  _LoginPageState createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -84,7 +92,7 @@ class LoginPage extends StatelessWidget {
                         ),
                       ),
                       LoginForm(
-                        login: login,
+                        login: widget.login,
                         newUser: true,
                       ) // This contains textfield and signup button
                     ],
@@ -121,10 +129,71 @@ class _LoginFormState extends State<LoginForm> {
   // This variable holds the function of the sign up button
   TextEditingController usernameText = new TextEditingController();
   TextEditingController passwordText = new TextEditingController();
+  File jsonFile;
+  Directory dir;
+  String fileName = "userData.json";
+  bool fileExists = false;
+  Map<String, dynamic> fileContent;
 
-  addStringToSF() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.setString('username', "${usernameController.text}");
+  @override
+  void initState() {
+    super.initState();
+
+    // Calls the checkIfTextEmpty function every time the text changes.
+    usernameController.addListener(checkIfTextEmpty);
+    usernameText.addListener(checkIfTextEmpty);
+    getExternalStorageDirectory().then((Directory directory) {
+      dir = directory;
+      jsonFile = new File(dir.path + "/" + fileName);
+      fileExists = jsonFile.existsSync();
+      if (fileExists)
+        this.setState(
+            () => fileContent = json.decode(jsonFile.readAsStringSync()));
+    });
+  }
+
+  void createFile(
+      Map<String, dynamic> content, Directory dir, String fileName) {
+    print("Creating file!");
+    File file = new File(dir.path + "/" + fileName);
+    print(dir);
+    file.createSync();
+    fileExists = true;
+    file.writeAsStringSync(json.encode(content));
+  }
+
+  void writeToFile(String yousername, bool isLoggedIn) {
+    print("Writing to file!");
+    Map<String, dynamic> content = {
+      'username': yousername,
+      'isLoggedIn': isLoggedIn
+    };
+
+    if (fileExists) {
+      print("File exists");
+
+      print("Old file content: " + jsonFile.readAsStringSync());
+      print(json.decode(jsonFile
+          .readAsStringSync())); // Prints old file content and json decode of file  content
+
+      Map<String, dynamic> jsonFileContent =
+          json.decode(jsonFile.readAsStringSync());
+      jsonFileContent.addAll(content);
+      jsonFile.writeAsStringSync(json.encode(jsonFileContent));
+
+      print("New file content: " + jsonFile.readAsStringSync());
+      print(json.decode(jsonFile
+          .readAsStringSync())); // Prints new file content and json decode of file content
+    } else {
+      print("File does not exist!");
+      createFile(content, dir, fileName);
+      print("New file content: " + jsonFile.readAsStringSync());
+      print(json.decode(jsonFile
+          .readAsStringSync())); // Prints new file content and json decode of file content
+    }
+    this.setState(() => fileContent = json.decode(jsonFile
+        .readAsStringSync())); // setstate makes sure any widget that uses fileContent updates as fileContent changes
+    print(fileContent);
   }
 
   void checkIfTextEmpty() {
@@ -137,6 +206,7 @@ class _LoginFormState extends State<LoginForm> {
         buttonTextColor = Colors.white;
         buttonFunction = () {
           username = usernameController.text;
+          writeToFile(username, true);
           Navigator.pushReplacementNamed(
             context,
             "/login", //This is a route, its value can be found in main (it heads to homepage)
@@ -171,15 +241,6 @@ class _LoginFormState extends State<LoginForm> {
         buttonFunction = null;
       });
     }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-
-    // Calls the checkIfTextEmpty function every time the text changes.
-    usernameController.addListener(checkIfTextEmpty);
-    usernameText.addListener(checkIfTextEmpty);
   }
 
   @override

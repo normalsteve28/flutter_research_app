@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+// import 'package:flutter_svg/svg.dart';
 
-import '../assets.dart'; // Contains svg icons
-import '../see_all_buttons.dart';
+//nimport '../assets.dart'; // Contains svg icons
+// import '../see_all_buttons.dart';
 import 'learn_assets/articlelist.dart';
 import 'learn_assets/articles.dart';
 
@@ -16,7 +16,7 @@ class Learn extends StatelessWidget {
         backgroundColor: Color(0xffFE7575),
       ),
       body: LearnPage(), // List of articles
-      backgroundColor: Colors.pink[50],
+      backgroundColor: Color(0xffffebeb),
     );
   }
 }

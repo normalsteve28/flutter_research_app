@@ -5,7 +5,7 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "flutter_research_app",
+            "name": "heart_go",
             "request": "launch",
             "type": "dart"
         }

@@ -1,4 +1,4 @@
-# flutter_research_app
+# heart_go
 
 A new Flutter project.
 

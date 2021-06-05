@@ -129,20 +129,20 @@ class HomeState extends State<Home> {
             controller: hrInputController,
           ),
           new Padding(padding: new EdgeInsets.only(top: 20.0)),
-          new RaisedButton(
+          new ElevatedButton(
             child: new Text("Add key, value pair"),
             onPressed: () => writeToFile(sysInputController.text,
                 diaInputController.text, hrInputController.text),
           ),
-          new RaisedButton(
+          new ElevatedButton(
             child: new Text("Remove key-value pair"),
             onPressed: () => removeFromFile(),
           ),
-          new RaisedButton(
+          new ElevatedButton(
             child: new Text("Delete file"),
             onPressed: () => deleteFile(),
           ),
-          new RaisedButton(
+          new ElevatedButton(
             child: new Text("Print file content"),
             onPressed: () => print(json.decode(jsonFile.readAsStringSync())),
           ),

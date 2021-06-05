@@ -56,17 +56,17 @@ class _ChartsTabBarState extends State<ChartsTabBar>
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: demo
-                    ? Container(
-                        child: Center(
-                            child: Text(
-                        "Not available in the learning version of the app!",
-                        style:
-                            TextStyle(fontFamily: 'Montserrat', fontSize: 15),
-                      )))
-                    : Container(
-                        child: ChartsOne(),
-                      ),
+                child: Container(
+                  child: demo
+                      ? Container(
+                          child: Center(
+                              child: Text(
+                          "Not available in the learning version of the app!",
+                          style:
+                              TextStyle(fontFamily: 'Montserrat', fontSize: 15),
+                        )))
+                      : ChartsOne(),
+                ),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),

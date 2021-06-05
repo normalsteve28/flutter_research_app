@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.flutter_research_app">
+    package="com.example.heart_go">
    <application
-        android:label="flutter_research_app"
+        android:label="HeartGo"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

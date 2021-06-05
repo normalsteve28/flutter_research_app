@@ -18,9 +18,9 @@ class StartButton extends StatelessWidget {
       ], borderRadius: BorderRadius.circular(20)),
       child: RaisedButton(
         child: SvgPicture.asset(startButton),
-        color: Colors.pink[50],
+        color: Color(0xffffebeb),
         padding: EdgeInsets.all(75),
-        hoverColor: Color(0xF20202),
+        hoverColor: Color(0xF2fe7575),
         elevation: 5.0,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         onPressed: () {

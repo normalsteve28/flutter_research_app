@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:io';
 import 'dart:convert';
-import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 
 import '../../username.dart';
@@ -24,7 +23,7 @@ class _HistoryBoxesState extends State<HistoryBoxes> {
   @override
   void initState() {
     super.initState();
-    getExternalStorageDirectory().then((Directory directory) {
+    getApplicationDocumentsDirectory().then((Directory directory) {
       dir = directory;
       jsonFile = new File(dir.path + "/" + fileName);
       fileExists = jsonFile.existsSync();
@@ -43,17 +42,16 @@ class _HistoryBoxesState extends State<HistoryBoxes> {
     file.writeAsStringSync(json.encode(content));
   }
 
-  void writeToFile(int sys, int dia, int hr, String dth, String dtm) {
+  void writeToFile(int sys, int dia, int hr, String dt) {
     print("Writing to file!");
     List<dynamic> initialContent = [
-      {'sys': sys, 'dia': dia, 'hr': hr, 'dth': dth, 'dtm': dtm}
+      {'sys': sys, 'dia': dia, 'hr': hr, 'dt': dt}
     ];
     Map<String, dynamic> content = {
       'sys': sys,
       'dia': dia,
       'hr': hr,
-      'dth': dth,
-      'dtm': dtm,
+      'dt': dt,
     };
 
     if (fileExists) {
@@ -70,12 +68,14 @@ class _HistoryBoxesState extends State<HistoryBoxes> {
       print("New file content: " + jsonFile.readAsStringSync());
       print(json.decode(jsonFile
           .readAsStringSync())); // Prints new file content and json decode of file content
+      items.add(HistoryBoxContainer(sys, dia, hr, dt));
     } else {
       print("File does not exist!");
       createFile(initialContent, dir, fileName);
       print("New file content: " + jsonFile.readAsStringSync());
       print(json.decode(jsonFile
           .readAsStringSync())); // Prints new file content and json decode of file content
+      items.add(HistoryBoxContainer(sys, dia, hr, dt));
     }
     this.setState(() => fileContent = json.decode(jsonFile
         .readAsStringSync())); // setstate makes sure any widget that uses fileContent updates as fileContent changes
@@ -90,24 +90,16 @@ class _HistoryBoxesState extends State<HistoryBoxes> {
       jsonFile.writeAsStringSync(json.encode(jsonFileContent));
       print(jsonFile.readAsStringSync());
       print(json.decode(jsonFile.readAsStringSync()));
+      items.removeLast();
     } else {
       print('File does not exist! Create one by writing to file!');
     }
   }
 
-  addHistoryBox() {
-    items.add(
-      // Adds history box with systolic, diastolic, heart rate values
-      HistoryBoxContainer(index, fileContent),
-    );
-  }
-
   removeHistoryBox() {
     // removes history boxes
-    removeFromFile();
-    items.removeLast();
-
     index -= 1;
+    removeFromFile();
   }
 
   @override
@@ -120,10 +112,8 @@ class _HistoryBoxesState extends State<HistoryBoxes> {
               // Button that adds history boxes for testing ( it adds blank data to bp data list )
               onPressed: () {
                 setState(() {
-                  writeToFile(0, 0, 0, DateTime.now().hour.toString(),
-                      DateTime.now().minute.toString());
+                  writeToFile(0, 0, 0, DateTime.now().toString());
                   index += 1;
-                  addHistoryBox();
                 });
                 print("Items length: ${items.length}");
                 print("File content length: ${fileContent.length}");
@@ -159,35 +149,35 @@ class _HistoryBoxesState extends State<HistoryBoxes> {
           ],
         ),
         Expanded(
-            child: SingleChildScrollView(
-          // This SingleChildScrollView allows the horizontal scrolling of the contents
-          // of the child of Container, which is Row
-          physics: BouncingScrollPhysics(),
-          scrollDirection: Axis.horizontal,
-          child: Row(
-            children: [
-              items.isEmpty
-                  ? Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Text(
-                          "You havent started measuring yet.\n(Can add boxes for testing purposes)",
-                          style: TextStyle(fontSize: 18)),
-                    )
-                  : Container(),
-              ...items,
-            ],
+          child: SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            physics: BouncingScrollPhysics(),
+            child: Row(
+              children: [
+                items.isEmpty
+                    ? Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Text("You havent started measuring yet.",
+                            style: TextStyle(fontSize: 18)),
+                      )
+                    : Container(),
+                ...items
+              ],
+            ),
           ),
-        )),
+        ),
       ],
     );
   }
 }
 
 class HistoryBoxContainer extends StatelessWidget {
-  final int index;
-  final List<dynamic> fileContent;
+  final int sys;
+  final int dia;
+  final int hr;
+  final String dt;
 
-  HistoryBoxContainer(this.index, this.fileContent);
+  HistoryBoxContainer(this.sys, this.dia, this.hr, this.dt);
 
   @override
   Widget build(BuildContext context) {
@@ -216,7 +206,7 @@ class HistoryBoxContainer extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  "${fileContent[index]['sys']} mmhg",
+                  "$sys mmhg",
                   style: TextStyle(
                     fontFamily: 'Montserrat',
                     fontSize: 14,
@@ -237,7 +227,7 @@ class HistoryBoxContainer extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  "${fileContent[index]['dia']} mmhg",
+                  "$dia mmhg",
                   style: TextStyle(
                     fontFamily: 'Montserrat',
                     fontSize: 14,
@@ -258,7 +248,7 @@ class HistoryBoxContainer extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  "${fileContent[index]['hr']} bpm",
+                  "$hr bpm",
                   style: TextStyle(
                     fontFamily: 'Montserrat',
                     fontSize: 14,

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+// import 'package:flutter/material.dart';
 
 const heartAttack = 'assets/articleimages/heartattack.jpg';
 const hypertensionPng = 'assets/articleimages/hypertension.png';
@@ -42,18 +42,28 @@ The long-term force of blood on the artery walls creates damage on the surface a
 This may result in future health issues concerning that of your heart. 
 
     This condition comes in stages, ranging in severity. These stages are as follows:
-Stage 1: 
-    This first stage is considered the "normal" stage. The systolic level of an individual will be less than 130 mm Hg and the diastolic rate will be less than 80 mm Hg. An individual would not need care at this stage due to its normality. It is still necessary to monitor your blood pressure for the preservation of your health. 
 
-Stage 2: 
-    This process is known as prehypertension. Systolic Hg is between 130 and 139 mm and diastolic Hg between 80 and 89 mm. Prevention can still be applied at this stage. However, they are at risk of hypertension which could lead to subsequent heart disease or stroke. 
+Normal: 
+    This first stage is considered the "normal" stage. The systolic level of an individual with normal blood pressure is less than 120 mm Hg or a diastolic rate of less than 80 mm Hg. An individual would not need care at this stage due to its normality. It is still necessary to monitor your blood pressure for the preservation of your health. 
+
+Elevated: 
+    This stage is also known as prehypertension. Systolic mm Hg is between 120 or 129 mm Hg and diastolic mm Hg less than 80. Prevention can still be applied at this stage. However, they are at risk of hypertension which could lead to subsequent heart disease or stroke. 
 At this point, medicine is often not prescribed. However, to prevent hypertension, a person must make changes to his or her lifestyle. This could mean quitting cigarettes or making dietary alterations. Exercise is another good step to reducing your blood pressure.
 
-Stage 3: 
-    This is the stage in which a person is at risk of various health complications. Systolic is between 140 and 159 mm Hg, and diastolic between 90 and 99 mm Hg. An individual has advised medication at this point to decrease their blood pressure and risk of heart attack and/or stroke. 
+Hypertension Stage 1: 
+    This is the stage in which a person is at risk of various health complications. Systolic is between 130 and 139 mm Hg, and diastolic between 80 and 89 mm Hg. At this point, lifestyle changes are prescribed and blood pressure medication may be considered to decrease their blood pressure and risk of heart attack and/or stroke. 
 
-Stage 4: 
-    Diastolic is at 160 mm Hg or higher and systolic at 100 mm Hg or higher. This stage is the most severe and has the highest risk of coronary heart disease. Stricter changes in daily regimen are applied concerning diets, exercise, and lifestyle.
+Hypertension Stage 2: 
+    Systolic is at 140 mm Hg or higher and diastolic at 90 mm Hg or higher. At this stage, there is a higher risk of heart attack and stroke. Doctors are likely to prescribe a combination of lifestyle changes and blood pressure medications.
+
+Hypertensive Crisis:
+    This stage is marked by a blood pressure reading higher than 180/120 mm Hg (Systolic greater than 180, Diastolic greater than 120). This is the most severe stage of high blood pressure and requires immediate medical attention. Wait for 5 minutes and measure your blood pressure again. If your blood pressure is still high, contact your doctor immediately. If you're experiencing chest pain, breathing problems, vision problems, back pain, numbness/weakness, difficulty speaking, or any other signs of a stroke or a heart attack, call 911 or your local emergency number immediately.
+
+
+
+Sources:
+- American Heart Association
+- MayoClinic
 ''',
 // Article 3
   '''   For early detection of hypertension, it is important to know the symptoms and causes. 
@@ -114,11 +124,35 @@ This can enhance the body\’s ability to distribute oxygen and nutrients to the
 Additionally, a person attains a healthy weight through physical activity. 
 
     It is also necessary to cut out habits such as smoking, excessive intake of caffeine or alcohol, and intake of illegal drugs that may aggravate your body\’s overall health and lead to a weaker functioning body. 
+''',
+// Article 7
+  '''   Checking for your blood pressure is not only evident when you go to your doctor's office or a clinic; you can monitor your own blood pressure at your home on a regular basis. 
+
+    With blood pressure monitors, you can determine your blood pressure health, and identify if you are at risk for hypertension!
+
+    However, factors may cause blood pressure measurement inaccuracies so you should: 
+
+Do's: 
+  - Sit quietly and rest for five minutes before taking blood pressure
+  - Wait for 30 minutes after eating food, drinking coffee, consuming alcohol, or smoking before measuring blood pressure
+  - Sit in a chair with your feet on the floor with your arm supported so your elbow is around heart level
+  - Take your blood pressure twice a day: morning and evening
+  - The blood pressure cuff should be placed on bare skin.
+  - Confirm your blood pressure readings by taking 2 or 3 readings in one occassion if there are reading differences.
+
+Don'ts: 
+  - Exercising before taking blood pressure measurements
+  - Not relaxing before taking blood pressure measurements.
+  - Eating food, drinking coffee, consuming alcohol, or smoking before taking blood pressure measurements.
+  - Having bad posture and crossing your legs while taking your blood pressure
+  - Not taking blood pressure measurements in a room temperature environment (too cold or hot) 
+  - Talking during the measurement
 '''
 ];
 // ---------------------------------------------------------
 // ---------------------------------------------------------
 // ---------------------------------------------------------
+// TODO: Add CPR article and How to measure blood pressure article
 
 List<String> images = [
   heartAttack,

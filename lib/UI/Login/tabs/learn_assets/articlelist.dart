@@ -14,7 +14,9 @@ class ArticleList extends StatelessWidget {
     ArticleCard(
         "What is heart rate?", articles[4], images[4], null, articleIcons[4]),
     ArticleCard("How to stay heart healthy", articles[5], images[5], null,
-        articleIcons[5])
+        articleIcons[5]),
+    ArticleCard("Measuring your blood pressure effectively", articles[6], null,
+        null, null)
   ];
   /* 
   The list above is the list of Article Cards.
@@ -87,7 +89,20 @@ class ArticleCard extends StatelessWidget {
                         padding: const EdgeInsets.all(0.00000000001),
                         child: SvgPicture.asset(articleIcon),
                       )
-                    : Container(),
+                    : Padding(
+                        padding: const EdgeInsets.all(5),
+                        child: Center(
+                            child: Text(
+                          "No image for this one :)",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 14,
+                            fontFamily: "Montserrat",
+                            fontWeight: FontWeight.w600,
+                          ),
+                        )),
+                      ),
               ),
               Expanded(
                 child: Column(

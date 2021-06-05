@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'dart:async';
-import 'package:intl/intl.dart';
+import 'dart:io';
+import 'dart:convert';
+import 'package:path_provider/path_provider.dart';
+// import 'package:intl/intl.dart';
+
+import '../../username.dart';
 
 class ChartsOne extends StatefulWidget {
   @override
@@ -10,28 +15,77 @@ class ChartsOne extends StatefulWidget {
 
 class _ChartsOneState extends State<ChartsOne> {
   dynamic currentWD = DateTime.now().weekday;
-  dynamic fiveBeforeWD;
-  dynamic fourBeforeWD;
-  dynamic threeBeforeWD;
-  dynamic twoBeforeWD;
-  dynamic oneBeforeWD;
+  int fiveBeforeWD;
+  int fourBeforeWD;
+  int threeBeforeWD;
+  int twoBeforeWD;
+  int oneBeforeWD;
+  String currentWDStr;
+  String fiveBeforeWDStr;
+  String fourBeforeWDStr;
+  String threeBeforeWDStr;
+  String twoBeforeWDStr;
+  String oneBeforeWDStr;
 
   @override
   void initState() {
     super.initState();
-    Timer.periodic(Duration(seconds: 1), (Timer t) => _getTime());
+    Timer.periodic(Duration(seconds: 0), (Timer t) => _getTime());
   }
 
   void _getTime() {
-    setState(() {
-      fiveBeforeWD = currentWD - 5;
-      fourBeforeWD = currentWD - 4;
-      threeBeforeWD = currentWD - 3;
-      twoBeforeWD = currentWD - 2;
-      oneBeforeWD = currentWD - 1;
-    });
-    print('c$currentWD');
-    print('$fiveBeforeWD');
+    fiveBeforeWD = currentWD - 5;
+
+    if (fiveBeforeWD == -4) {
+      fiveBeforeWDStr = 'MON';
+      fourBeforeWDStr = 'TUE';
+      threeBeforeWDStr = 'WED';
+      twoBeforeWDStr = 'THU';
+      oneBeforeWDStr = 'FRI';
+      currentWDStr = 'SAT';
+    } else if (fiveBeforeWD == -3) {
+      fiveBeforeWDStr = 'TUE';
+      fourBeforeWDStr = 'WED';
+      threeBeforeWDStr = 'THU';
+      twoBeforeWDStr = 'FRI';
+      oneBeforeWDStr = 'SAT';
+      currentWDStr = 'SUN';
+    } else if (fiveBeforeWD == -2) {
+      fiveBeforeWDStr = 'WED';
+      fourBeforeWDStr = 'THU';
+      threeBeforeWDStr = 'FRI';
+      twoBeforeWDStr = 'SAT';
+      oneBeforeWDStr = 'SUN';
+      currentWDStr = 'MON';
+    } else if (fiveBeforeWD == -1) {
+      fiveBeforeWDStr = 'THU';
+      fourBeforeWDStr = 'FRI';
+      threeBeforeWDStr = 'SAT';
+      twoBeforeWDStr = 'SUN';
+      oneBeforeWDStr = 'MON';
+      currentWDStr = 'TUE';
+    } else if (fiveBeforeWD == 0) {
+      fiveBeforeWDStr = 'FRI';
+      fourBeforeWDStr = 'SAT';
+      threeBeforeWDStr = 'SUN';
+      twoBeforeWDStr = 'MON';
+      oneBeforeWDStr = 'TUE';
+      currentWDStr = 'WED';
+    } else if (fiveBeforeWD == 1) {
+      fiveBeforeWDStr = 'SAT';
+      fourBeforeWDStr = 'SUN';
+      threeBeforeWDStr = 'MON';
+      twoBeforeWDStr = 'TUE';
+      oneBeforeWDStr = 'WED';
+      currentWDStr = 'THU';
+    } else if (fiveBeforeWD == 2) {
+      fiveBeforeWDStr = 'SUN';
+      fourBeforeWDStr = 'MON';
+      threeBeforeWDStr = 'TUE';
+      twoBeforeWDStr = 'WED';
+      oneBeforeWDStr = 'THU';
+      currentWDStr = 'FRI';
+    }
   }
 
   List<LineChartBarData> linesBarData1() {
@@ -43,8 +97,6 @@ class _ChartsOneState extends State<ChartsOne> {
         FlSpot(5, 1.4),
         FlSpot(7, 3.4),
         FlSpot(10, 2),
-        FlSpot(12, 2.2),
-        FlSpot(13, 1.8),
       ],
       isCurved: true,
       colors: [
@@ -139,17 +191,17 @@ class _ChartsOneState extends State<ChartsOne> {
           getTitles: (value) {
             switch (value.toInt()) {
               case 1:
-                return '$fiveBeforeWD';
+                return '$fiveBeforeWDStr';
               case 3:
-                return '$currentWD';
+                return '$fourBeforeWDStr';
               case 5:
-                return '$currentWD';
+                return '$threeBeforeWDStr';
               case 7:
-                return 'WED';
+                return '$twoBeforeWDStr';
               case 9:
-                return 'THURS';
+                return '$oneBeforeWDStr';
               case 11:
-                return 'FRI';
+                return '$currentWDStr';
             }
             return '';
           },

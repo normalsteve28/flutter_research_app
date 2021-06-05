@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../assets.dart';
+
 class MonitorPageTwo extends StatelessWidget {
   final String backArrow = 'assets/icons/backarrow.svg';
   //This class is the page that shows up when you press Start
@@ -16,12 +18,13 @@ class MonitorPageTwo extends StatelessWidget {
           backgroundColor: Colors.transparent,
           shadowColor: Colors.transparent,
         ),
-        backgroundColor: Colors.pink[50],
+        backgroundColor: Color(0xffffebeb),
         body: Center(
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
               children: [
+                SvgPicture.asset(doctorHeart),
                 Text(
                   "We're sorry! This function (blood pressure measurement) is not available in this version of the app.",
                   textAlign: TextAlign.center,

@@ -1,4 +1,4 @@
-package com.example.flutter_research_app
+package com.example.heart_go
 
 import io.flutter.embedding.android.FlutterActivity
 
