@@ -142,7 +142,7 @@ class _LoginFormState extends State<LoginForm> {
     // Calls the checkIfTextEmpty function every time the text changes.
     usernameController.addListener(checkIfTextEmpty);
     usernameText.addListener(checkIfTextEmpty);
-    getExternalStorageDirectory().then((Directory directory) {
+    getApplicationDocumentsDirectory().then((Directory directory) {
       dir = directory;
       jsonFile = new File(dir.path + "/" + fileName);
       fileExists = jsonFile.existsSync();
