@@ -70,6 +70,7 @@ flutter:
     - assets/icons/bp_man_drawing.svg
     - assets/icons/backarrow.svg
     - assets/icons/doctor_heart.svg
+    - assets/icons/time_icon.svg
     - assets/articleimages/heartattack.jpg
     - assets/articleimages/hypertension.png
     - assets/articleimages/bloodpressure.png
@@ -78,6 +79,7 @@ flutter:
     - assets/articleimages/hearthealthy.png
     - assets/icons/doctor_heart.png
     - assets/icons/sad_doctor_heart.png
+    - assets/icons/time_icon.png
     - assets/articleimages/hypertension.svg
     - assets/articleimages/bloodpressure.svg
     - assets/articleimages/hypertension_flip.svg

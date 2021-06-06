@@ -12,5 +12,7 @@ const bpDrawing = 'assets/icons/bp_man_drawing.svg';
 const doctorHeart = 'assets/icons/doctor_heart.svg';
 const doctorHeartPng = 'assets/icons/doctor_heart.png';
 const sadDoctorHeart = 'assets/icons/sad_doctor_heart.png';
+const timeIconPng = 'assets/icons/time_icon.png';
+const timeIconSvg = 'assets/icons/time_icon.svg';
 
 // these are the icon filepath put inside variables
