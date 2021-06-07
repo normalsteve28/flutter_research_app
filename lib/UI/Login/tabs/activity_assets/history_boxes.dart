@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'dart:io';
 import 'dart:convert';
@@ -34,7 +35,7 @@ class _HistoryBoxesState extends State<HistoryBoxes> {
   @override
   void initState() {
     super.initState();
-    Timer.periodic(Duration(seconds: 0), (Timer t) => itemsEqualFile());
+    itemsEqualFile();
     getExternalStorageDirectory().then((Directory directory) {
       dir = directory;
       jsonFile = new File(dir.path + "/" + fileName);
@@ -42,6 +43,9 @@ class _HistoryBoxesState extends State<HistoryBoxes> {
       if (fileExists)
         this.setState(
             () => fileContent = json.decode(jsonFile.readAsStringSync()));
+      itemsEqualFile();
+      itemsEqualFile();
+      itemsEqualFile();
     });
   }
 
@@ -103,7 +107,6 @@ class _HistoryBoxesState extends State<HistoryBoxes> {
       jsonFile.writeAsStringSync(json.encode(jsonFileContent));
       print(jsonFile.readAsStringSync());
       print(json.decode(jsonFile.readAsStringSync()));
-      items.removeLast();
     } else {
       print('File does not exist! Create one by writing to file!');
     }
@@ -112,6 +115,7 @@ class _HistoryBoxesState extends State<HistoryBoxes> {
   removeHistoryBox() {
     // removes history boxes
     removeFromFile();
+    items.removeLast();
   }
 
   itemsEqualFile() {
@@ -213,120 +217,142 @@ class _HistoryBoxesState extends State<HistoryBoxes> {
   }
 
   Widget _DialogWithTextField(BuildContext context) => Container(
-        height: 380,
+        height: 420,
         decoration: BoxDecoration(
           color: Colors.white,
           shape: BoxShape.rectangle,
           borderRadius: BorderRadius.all(Radius.circular(12)),
         ),
-        child: Column(
-          children: <Widget>[
-            SizedBox(height: 24),
-            Text(
-              "ADD A MEASUREMENT".toUpperCase(),
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
-                fontSize: 17,
-              ),
-            ),
-            SizedBox(height: 10),
-            Padding(
-                padding:
-                    EdgeInsets.only(top: 10, bottom: 10, right: 15, left: 15),
-                child: TextField(
-                  controller: _sys,
-                  maxLines: 1,
-                  autofocus: false,
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                    labelText: 'Systolic',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20.0),
-                    ),
-                  ),
-                )),
-            Container(
-              width: 150.0,
-              height: 1.0,
-              color: Colors.grey[400],
-            ),
-            Padding(
-                padding: EdgeInsets.only(top: 10, right: 15, left: 15),
-                child: TextField(
-                  controller: _dia,
-                  maxLines: 1,
-                  autofocus: false,
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                    labelText: 'Diastolic',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20.0),
-                    ),
-                  ),
-                )),
-            SizedBox(height: 10),
-            Container(
-              width: 150.0,
-              height: 1.0,
-              color: Colors.grey[400],
-            ),
-            Padding(
-                padding: EdgeInsets.only(top: 10, right: 15, left: 15),
-                child: TextField(
-                  controller: _hr,
-                  maxLines: 1,
-                  autofocus: false,
-                  keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
-                    labelText: 'Heart Rate',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(20.0),
-                    ),
-                  ),
-                )),
-            SizedBox(height: 10),
-            Row(
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                FlatButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  child: Text(
-                    "Cancel",
-                    style: TextStyle(
-                      color: Colors.black,
-                    ),
-                  ),
+        child: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              SizedBox(height: 24),
+              Text(
+                "ADD A MEASUREMENT".toUpperCase(),
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 17,
                 ),
-                SizedBox(width: 8),
-                RaisedButton(
-                  color: Colors.white,
-                  child: Text(
-                    "Save".toUpperCase(),
-                    style: TextStyle(
-                      color: Colors.redAccent,
+              ),
+              SizedBox(height: 10),
+              Padding(
+                  padding:
+                      EdgeInsets.only(top: 10, bottom: 10, right: 15, left: 15),
+                  child: TextField(
+                    controller: _sys,
+                    maxLines: 1,
+                    maxLength: 3,
+                    maxLengthEnforcement: MaxLengthEnforcement.enforced,
+                    autofocus: false,
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
+                      labelText: 'Systolic',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                    ),
+                  )),
+              Container(
+                width: 150.0,
+                height: 1.0,
+                color: Colors.grey[400],
+              ),
+              Padding(
+                  padding: EdgeInsets.only(top: 10, right: 15, left: 15),
+                  child: TextField(
+                    controller: _dia,
+                    maxLines: 1,
+                    maxLength: 3,
+                    maxLengthEnforcement: MaxLengthEnforcement.enforced,
+                    autofocus: false,
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
+                      labelText: 'Diastolic',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                    ),
+                  )),
+              SizedBox(height: 10),
+              Container(
+                width: 150.0,
+                height: 1.0,
+                color: Colors.grey[400],
+              ),
+              Padding(
+                  padding: EdgeInsets.only(top: 10, right: 15, left: 15),
+                  child: TextField(
+                    controller: _hr,
+                    maxLines: 1,
+                    maxLength: 3,
+                    maxLengthEnforcement: MaxLengthEnforcement.enforced,
+                    autofocus: false,
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
+                      labelText: 'Heart Rate',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                    ),
+                  )),
+              SizedBox(height: 10),
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  FlatButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    child: Text(
+                      "Cancel",
+                      style: TextStyle(
+                        color: Colors.black,
+                      ),
                     ),
                   ),
-                  onPressed: () {
-                    print('Update the user info');
-                    setState(() {
-                      sys = int.parse(_sys.text) ?? 0;
-                      dia = int.parse(_dia.text) ?? 0;
-                      hr = int.parse(_hr.text) ?? 0;
-                      writeToFile(sys, dia, hr, DateTime.now().toString());
+                  SizedBox(width: 8),
+                  RaisedButton(
+                    color: Colors.white,
+                    child: Text(
+                      "Save".toUpperCase(),
+                      style: TextStyle(
+                        color: Colors.redAccent,
+                      ),
+                    ),
+                    onPressed: () {
+                      if (_sys.text.isEmpty || _sys.text == null) {
+                        sys = 0;
+                      } else {
+                        sys = int.parse(_sys.text);
+                      }
+                      if (_dia.text.isEmpty || _dia.text == null) {
+                        dia = 0;
+                      } else {
+                        dia = int.parse(_dia.text);
+                      }
+                      if (_hr.text.isEmpty || _hr.text == null) {
+                        hr = 0;
+                      } else {
+                        hr = int.parse(_hr.text);
+                      }
+                      print('Update the user info');
+                      setState(() {
+                        writeToFile(sys, dia, hr, DateTime.now().toString());
+                        print("Items length: ${items.length}");
+                        print("File content length: ${fileContent.length}");
+                        items.add(HistoryBoxContainer(
+                            sys, dia, hr, DateTime.now().toString()));
+                      });
                       itemsEqualFile();
-                      print("Items length: ${items.length}");
-                      print("File content length: ${fileContent.length}");
-                    });
-                    Navigator.of(context).pop(true);
-                  },
-                )
-              ],
-            ),
-          ],
+                      Navigator.of(context).pop(true);
+                    },
+                  )
+                ],
+              ),
+            ],
+          ),
         ),
       );
 }
@@ -372,6 +398,7 @@ class HistoryBoxContainer extends StatelessWidget {
                   fontSize: 14,
                   fontWeight: FontWeight.bold,
                 ),
+                overflow: TextOverflow.clip,
               )
             ],
           ),
@@ -393,6 +420,7 @@ class HistoryBoxContainer extends StatelessWidget {
                   fontSize: 14,
                   fontWeight: FontWeight.bold,
                 ),
+                overflow: TextOverflow.clip,
               )
             ],
           ),
@@ -414,6 +442,7 @@ class HistoryBoxContainer extends StatelessWidget {
                   fontSize: 14,
                   fontWeight: FontWeight.bold,
                 ),
+                overflow: TextOverflow.clip,
               ),
             ],
           ),
